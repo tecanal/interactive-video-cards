@@ -13,7 +13,6 @@ video.no-play::-webkit-media-controls-timeline {
 }
 
 .card {
-    position: absolute;
     transform: translateX(100%);
     -webkit-transform: translateX(100%);
 }

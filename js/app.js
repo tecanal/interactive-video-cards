@@ -1,6 +1,8 @@
 const video = document.getElementById("video");
 const sidePanelEl = document.getElementById("side_panel");
 
+let currentTime = 0;
+
 const cards = [
     {
         timestamp: "0:02",
@@ -78,7 +80,7 @@ function bindVideoListener() {
     if (!video) return;
 
     video.ontimeupdate = e => {
-        const currentTime = Math.floor(e.srcElement.currentTime);
+        currentTime = Math.floor(e.srcElement.currentTime);
 
         // check if new modules need to be displayed
         cards
@@ -238,8 +240,8 @@ function createComponent(card) {
  */
 function lockPlayer() {
     video.classList.add("no-play");
-    video.onplay = e => e.preventDefault();
-    video.onseeking = e => e.preventDefault();
+    video.onplay = () => video.pause();
+    video.onseeking = e => video.currentTime = currentTime; // TODO allow seeking to times before frozen spot?
 }
 
 /**
