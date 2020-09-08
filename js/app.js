@@ -29,27 +29,24 @@ const cards = [
 ];
 
 (function init() {
-    parseModules(cards);
-
-    video.autoplay = true;
-    video.muted = true;
+    parseCardTimestamps(cards);
 
     bindVideoListener();
 })();
 
 /**
- * Parse the modules and process their timestamps into seconds values from a 
+ * Parse the cards and process their timestamps into seconds values from a 
  * given modules object array.
- * @param {Object[]} data 
+ * @param {Object[]} cards 
  */
-function parseModules(data) {
+function parseCardTimestamps(cards) {
     // calculate the seconds value of the timestamp
-    data
-        .forEach(module => {
-            if (module.seconds) return;
+    cards
+        .forEach(card => {
+            if (card.seconds) return;
 
             // parses timestamps HH:MM:SS
-            const seconds = module.timestamp
+            const seconds = card.timestamp
                 .split(":")
                 .map((x, i, arr) => {
                     const weight = arr.length - i;
@@ -66,10 +63,8 @@ function parseModules(data) {
                 })
                 .reduce((a, b) => a + b);
 
-            module.seconds = seconds;
+            card.seconds = seconds;
         });
-
-    cards.push(...data);
 }
 
 /**
