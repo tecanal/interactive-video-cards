@@ -3,6 +3,10 @@ const sidePanelEl = document.getElementById("side_panel");
 
 let currentTime = 0;
 
+/**
+ * Parse cards and create card objects and bind them to the video.
+ * @param {Object[]} cards 
+ */
 function createCards(cards) {
     parseCardTimestamps(cards);
 
@@ -101,7 +105,7 @@ function createComponent(card) {
     // create a header element that displays the card type and the dismissal button
     const cardHeaderEl = document.createElement("h5");
     cardHeaderEl.classList.add("card-header");
-    cardHeaderEl.innerText = card.type.substring(0, 1).toUpperCase() + card.type.substring(1);
+    cardHeaderEl.innerText = createTitle(card.type);
 
     // create the dismissal button and add it to the header element
     const dismissalButtonEl = document.createElement("button");
@@ -142,7 +146,7 @@ function createComponent(card) {
             </p>
         `;
     }
-    else if (card.type == "quiz")
+    else if (card.type == "multiple_choice")
     {
         title = data.question;
 
@@ -203,6 +207,18 @@ function createComponent(card) {
     cardEl.appendChild(cardBodyEl);
 
     return cardEl;
+}
+
+/**
+ * Get a card type and convert it to title case.
+ * @param {String} type 
+ * @returns {String} title
+ */
+function createTitle(type) {
+    return type
+        .split("_")
+        .map(x => x.substring(0, 1).toUpperCase() + x.substring(1))
+        .join(" ");
 }
 
 /**
