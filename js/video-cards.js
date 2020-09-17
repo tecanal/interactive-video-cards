@@ -3,36 +3,11 @@ const sidePanelEl = document.getElementById("side_panel");
 
 let currentTime = 0;
 
-const cards = [
-    {
-        timestamp: "0:02",
-        type: "definition",
-        data: {
-            term: "Water Cycle",
-            definition: "The continuous movement of water on, above, and below the surface of the Earth."
-        }
-    },
-    {
-        timestamp: "0:05",
-        type: "quiz",
-        data: {
-            question: "Which of the following is NOT a part of the water cycle?",
-            options: [
-                "Condensation",
-                "Carboxylation",
-                "Evaporation",
-                "Precipitation"
-            ],
-            answer: "Carboxylation"
-        }
-    }
-];
-
-(function init() {
+function createCards(cards) {
     parseCardTimestamps(cards);
 
-    bindVideoListener();
-})();
+    bindVideoListener(cards);
+}
 
 /**
  * Parse the cards and process their timestamps into seconds values from a 
@@ -71,7 +46,7 @@ function parseCardTimestamps(cards) {
  * Bind the video listener function to the video element which handles what components to show depending 
  * on video time.
  */
-function bindVideoListener() {
+function bindVideoListener(cards) {
     if (!video) return;
 
     video.ontimeupdate = e => {
