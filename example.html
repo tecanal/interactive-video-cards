@@ -32,6 +32,34 @@
             integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" 
             crossorigin="anonymous"></script>
 
-        <script src="js/app.js"></script>
+        <script src="js/video-cards.js"></script>
+        <script>
+            const cards = [
+                {
+                    timestamp: "0:02",
+                    type: "definition",
+                    data: {
+                        term: "Water Cycle",
+                        definition: "The continuous movement of water on, above, and below the surface of the Earth."
+                    }
+                },
+                {
+                    timestamp: "0:05",
+                    type: "quiz",
+                    data: {
+                        question: "Which of the following is NOT a part of the water cycle?",
+                        options: [
+                            "Condensation",
+                            "Carboxylation",
+                            "Evaporation",
+                            "Precipitation"
+                        ],
+                        answer: "Carboxylation"
+                    }
+                }
+            ];
+            
+            createCards(cards);
+        </script>
     </body>
 </html>
